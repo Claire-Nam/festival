@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>콘텐츠 웹사이트</title>
+
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="image/favicon-rm.png"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css"
+    />
+
+    <!-- script -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="search-bar">
+        <input class="searchInput" type="text" placeholder="Search..." />
+        <button class="searchBtn" type="submit">Search</button>
+      </header>
+
+      <main class="content-area">
+        <div class="content">
+          <div class="month">
+            <h2 id="month"></h2>
+          </div>
+          <!-- swiper -->
+          <div id="coverflow-swiper" class="swiper-container">
+            <div class="swiper-wrapper">
+              <div>
+                <img src="image\foods\korea1.png" alt="${item.title}" />
+                <p class="body-title">festival1</p>
+              </div>
+              <div>
+                <img src="image\foods\korea1.png" alt="${item.title}" />
+                <p class="body-title">festival1</p>
+              </div>
+              <div>
+                <img src="image\foods\korea1.png" alt="${item.title}" />
+                <p class="body-title">festival1</p>
+              </div>
+              <!-- JS로 동적으로 데이터 추가 -->
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="nav-bar">
+        <nav>
+          <ul>
+            <li>
+              <a href="./index.html"><img src="image/house.svg" /></a>
+            </li>
+            <li>
+              <a href="./foods.html"><img src="image/cup-hot.svg" /></a>
+            </li>
+            <li>
+              <a href="./house.html"><img src="image/flower2.svg" /></a>
+            </li>
+            <li>
+              <a href="./park.html"><img src="image/p-square.svg" /></a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+
+      <!-- script -->
+      <script src="index.js"></script>
+    </div>
+  </body>
+</html>

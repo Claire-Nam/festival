@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>콘텐츠 웹사이트</title>
+
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="image/favicon-rm.png"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="foods.css" />
+
+    <!-- Google Material Icons 사용 -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- script -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="search-bar">
+        <input class="searchInput" type="text" placeholder="Search..." />
+        <button class="searchBtn" type="submit">Search</button>
+      </header>
+
+      <main class="content-area">
+        <div class="content">
+          <!-- 여기에 콘텐츠가 들어갑니다 -->
+          <h2 id="foods">세계 음식점</h2>
+          <!-- card swiper -->
+          <div class="swiper-container">
+            <div class="swiper-wrapper cardGroup"></div>
+            <div class="swiper-btn-next">></div>
+            <div class="swiper-btn-prev"><</div>
+          </div>
+          <h2 id="foods">음식점 리스트</h2>
+          <div class="table-container">
+            <div class="dropdown">
+              <button class="dropBtn">
+                <span class="dropBtn_content">카테고리</span>
+                <span class="dropBtn_click material-icons"
+                  >arrow_drop_down</span
+                >
+              </button>
+              <div class="dropdown-content">
+              </div>
+            </div>
+
+            <!-- 테이블 시작 -->
+            <div class="tableList">
+              <table id="resTable">
+                <thead>
+                  <tr>
+                    <th>식당명</th>
+                    <th>카테고리</th>
+                    <th>식당 주소</th>
+                    <th>전화 번호</th>
+                    <th>주차 여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr></tr>
+                  <!-- API에서 데이터를 불러와 추가 -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="loadMore-container">
+            <button id="loadMore">더보기</button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="nav-bar">
+        <nav>
+          <ul>
+            <li>
+              <a href="./index.html"><img src="image/house.svg" /></a>
+            </li>
+            <li>
+              <a href="./foods.html"><img src="image/cup-hot.svg" /></a>
+            </li>
+            <li>
+              <a href="./house.html"><img src="image/flower2.svg" /></a>
+            </li>
+            <li>
+              <a href="./park.html"><img src="image/p-square.svg" /></a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+
+      <!-- script -->
+      <script src="foods.js"></script>
+    </div>
+  </body>
+</html>

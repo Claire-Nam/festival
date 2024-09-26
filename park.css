@@ -1,0 +1,283 @@
+@font-face {
+  font-family: "SlowSlow";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/SlowSlow.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 전체 배경 스타일 */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffd2d2;
+  display: flex;
+  justify-content: center;
+  font-family: "SlowSlow";
+}
+
+/* 컨테이너 영역 */
+.container {
+  width: 100%;
+  max-width: 1230px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+}
+
+/* 상단 검색 영역 */
+.search-bar {
+  height: 80px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.search-bar input {
+  width: 100%;
+  width: 500px;
+  padding: 8px;
+  padding-left: 40px; /* 이미지와 텍스트 간의 간격 */
+  font-size: 22px;
+  font-family: "SlowSlow";
+  border: 2px solid #ffd2d2;
+  border-radius: 14px;
+  background-image: url("image/search.png"); /* 이미지 경로 */
+  background-size: 20px; /* 이미지 크기 */
+  background-position: 10px center; /* 이미지 위치 (왼쪽 패딩을 고려) */
+  background-repeat: no-repeat;
+}
+
+.search-bar button {
+  margin-left: 5px;
+  padding: 8px 10px;
+  border: 1px solid #ffd2d2;
+  background-color: #ffd2d2;
+  border-radius: 10px;
+  font-family: "slowslow";
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* 콘텐츠 영역 */
+.content-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 1230px;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+/* 하단 네비게이션 영역 */
+.nav-bar {
+  height: 80px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bar nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.nav-bar nav ul li {
+  display: inline;
+}
+
+.nav-bar nav ul li a {
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px; /* 모든 버튼의 내부 여백을 동일하게 설정 */
+  background-color: none;
+  border: 2px solid #ffd2d2;
+  border-radius: 5px;
+  font-size: 22px; /* 폰트 크기 설정 */
+  font-weight: bold;
+  width: 80px; /* 버튼의 너비를 동일하게 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  display: inline-block; /* 링크를 블록처럼 취급하여 크기 조정 */
+}
+
+.nav-bar img {
+  width: 30px;
+  height: 30px;
+}
+
+/* content css */
+.month {
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#month {
+  margin-top: 10px;
+}
+
+/* Swiper 컨테이너 스타일 */
+.swiper-container {
+  width: 100%;
+  max-width: 1230px;
+  height: 630px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Swiper Wrapper 설정 */
+.swiper-wrapper {
+  display: flex;
+  height: 100%;
+  justify-content: center; /* 슬라이드를 가운데 정렬 */
+  transition: transform 0.6s ease;
+}
+
+/* Swiper 슬라이드 설정 */
+.swiper-slide {
+  width: 300px; /* 슬라이드 너비를 고정 */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0.5;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.swiper-slide-active {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+/* Swiper 이미지 설정 */
+.swiper-slide img {
+  max-width: 100%; /* 슬라이드 안에서 이미지 크기를 100%로 설정 */
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Swiper 텍스트 설정 */
+.body-title {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: #222;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 100%;
+  }
+
+  .swiper-slide img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* content css */
+#location {
+  text-align: center;
+  font-size: 45px;
+}
+
+#map {
+  width: 1000px;
+  height: 600px;
+}
+
+/* 테이블 css */
+/* 테이블을 포함한 컨테이너 */
+.tableList {
+  width: 100%;
+  overflow-x: auto; /* 필요할 경우 테이블에 가로 스크롤 허용 */
+  margin-top: 20px;
+  padding: 0; /* 불필요한 패딩 제거 */
+  border-spacing: 0; /* 셀 간 간격 없애기 */
+}
+
+#parkTable {
+  width: 100%;
+  border-collapse: collapse; /* 셀 간 간격 없애기 */
+  border-spacing: 0; /* 셀 간의 기본 간격 제거 */
+  margin: 0; /* 테이블 자체의 마진 제거 */
+  font-size: 22px;
+}
+
+#parkTable th,
+#parkTable td {
+  border: 1px solid #ddd; /* 셀 테두리 */
+  padding: 12px; /* 셀 내부 여백 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  margin: 0; /* 불필요한 마진 제거 */
+}
+
+#parkTable th {
+  background-color: #ffd2d2; /* 테이블 헤더 배경색 */
+  font-weight: bold; /* 헤더 글씨 굵게 */
+  font-size: 25px;
+  text-align: center;
+  margin: 0;
+}
+
+/* thead와 tbody 간의 간격 문제를 해결하기 위해 아래 속성 추가 */
+thead {
+  display: table-header-group; /* thead가 상단에 위치하도록 설정 */
+  border-spacing: 0; /* 셀 간 간격 제거 */
+}
+
+tbody {
+  display: table-row-group; /* tbody는 기본적으로 행 그룹으로 설정 */
+  border-spacing: 0; /* 셀 간 간격 제거 */
+}
+
+.working,
+.parkfee {
+  text-align: center !important;
+}
+
+/* "더보기" 버튼 스타일 */
+#loadMore {
+  font-family: "SlowSlow";
+  font-weight: bold;
+  font-size: 18px;
+  border: 1px solid #ffd2d2;
+  background-color: #ffd2d2;
+  border-radius: 15px;
+  padding: 10px 20px; /* 버튼 크기 조정 */
+  margin-top: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* "더보기" 버튼의 부모 요소에서 가운데 정렬 */
+.loadMore-container {
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 (필요시) */
+  margin-top: 10px;
+  width: 100%;
+}

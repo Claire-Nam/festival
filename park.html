@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>콘텐츠 웹사이트</title>
+
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="image/favicon-rm.png"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="park.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css"
+    />
+
+    <!-- script -->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5fa9691e45f5b0bf6424b6924e3b8d50"
+    ></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="search-bar">
+        <input class="searchInput" type="text" placeholder="Search..." />
+        <button class="searchBtn" type="submit">Search</button>
+      </header>
+
+      <main class="content-area">
+        <div class="content">
+          <h2 id="location">내 위치 정보</h2>
+          <div id="map"></div>
+          <h2 id="location">공영 주차장 리스트</h2>
+          <div class="table-container">
+            <div class="tableList">
+              <table id="parkTable">
+                <thead>
+                  <tr>
+                    <th>주차장명</th>
+                    <th>운영 요일</th>
+                    <th>주소</th>
+                    <th>연락처</th>
+                    <th>요금 정보</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr></tr>
+                  <!-- api 데이터를 불러와서 추가 예정 -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="loadMore-container">
+            <button id="loadMore">더보기</button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="nav-bar">
+        <nav>
+          <ul>
+            <li>
+              <a href="./index.html"><img src="image/house.svg" /></a>
+            </li>
+            <li>
+              <a href="./foods.html"><img src="image/cup-hot.svg" /></a>
+            </li>
+            <li>
+              <a href="./house.html"><img src="image/flower2.svg" /></a>
+            </li>
+            <li>
+              <a href="./park.html"><img src="image/p-square.svg" /></a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+
+      <!-- script -->
+      <script src="park.js"></script>
+    </div>
+  </body>
+</html>
