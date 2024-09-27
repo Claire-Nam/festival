@@ -1,27 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 검색 버튼 선택
   const search = document.querySelector(".searchBtn");
+  const inputElem = document.querySelector(".searchInput");
 
-  // 검색 버튼 이벤트 리스너 추가
-  search.addEventListener("click", function (e) {
-    e.preventDefault();
+  // 입력 필드가 있는지 확인
+  if (!inputElem) {
+    console.error("검색 입력 필드를 찾을 수 없습니다.");
+    return;
+  }
 
-    const inputElem = document.querySelector(".searchInput");
-
-    // 검색 입력 필드가 있는지 확인
-    if (!inputElem) {
-      console.error("검색 입력 필드를 찾을 수 없습니다.");
-      return;
-    }
-
-    // 입력된 값이 비어있는지 확인
+  // 검색 함수
+  function performSearch() {
     const inputValue = inputElem.value.trim();
     if (inputValue === "") {
       alert("검색어를 입력해주세요");
     } else {
       // 검색어가 있으면 해당 URL로 이동
-      window.location.href = `.search?q=${encodeURIComponent(inputValue)}`;
+      window.location.href = `search?q=${encodeURIComponent(inputValue)}`;
       inputElem.value = ""; // 입력 필드 초기화
+    }
+  }
+
+  // 검색 버튼 이벤트 리스너 추가
+  search.addEventListener("click", function (e) {
+    e.preventDefault();
+    performSearch();
+  });
+
+  // 입력 필드에서 'keydown' 이벤트 리스너 추가
+  inputElem.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      performSearch();
     }
   });
 });
