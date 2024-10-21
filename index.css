@@ -53,7 +53,7 @@ body {
   background-repeat: no-repeat;
 }
 
-.search-bar button {
+.searchBtn {
   margin-left: 5px;
   padding: 8px 10px;
   border: 1px solid #ffd2d2;

@@ -1,6 +1,7 @@
 window.onload = function () {
   const progressBar = document.querySelector(".progress");
   const startButton = document.getElementById("open");
+  const catSound = new Audio("./assets/meow.mp3");
 
   let width = 0;
   const interval = setInterval(() => {
@@ -32,5 +33,9 @@ window.onload = function () {
     setTimeout(() => {
       window.location.href = "index.html";
     }, 2200); // open.gif가 3초간 재생된 후 메인 페이지로 이동
+  });
+
+  startButton.addEventListener("click", function () {
+    catSound.play();
   });
 };

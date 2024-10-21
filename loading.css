@@ -27,7 +27,8 @@ body {
   width: 100%;
   max-width: 1230px;
   height: 100%;
-  background-color: #5b595b;
+  /* background-color: #5b595b; */
+  background-color: #f8fafa;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
