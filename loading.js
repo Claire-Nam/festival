@@ -10,7 +10,7 @@ window.onload = function () {
       clearInterval(interval);
       startButton.style.display = "block";
     }
-  }, 300); // 5초 동안 프로그래스 바가 100%까지 차오름
+  }, 50); // 5초 동안 프로그래스 바가 100%까지 차오름
 
   startButton.addEventListener("click", function () {
     // 모든 기존 요소 숨기기
@@ -31,6 +31,6 @@ window.onload = function () {
 
     setTimeout(() => {
       window.location.href = "index.html";
-    }, 2000); // open.gif가 3초간 재생된 후 메인 페이지로 이동
+    }, 2200); // open.gif가 3초간 재생된 후 메인 페이지로 이동
   });
 };
