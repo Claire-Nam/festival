@@ -32,7 +32,7 @@ window.onload = function () {
 
     setTimeout(() => {
       window.location.href = "index.html";
-    }, 2200); // open.gif가 3초간 재생된 후 메인 페이지로 이동
+    }, 2200); 
   });
 
   startButton.addEventListener("click", function () {

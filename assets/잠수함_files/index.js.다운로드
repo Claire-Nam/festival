@@ -1,0 +1,90 @@
+// canvas 객체 생성
+let canvas;
+let ctx;
+let canvasBuf;
+let bufferCtx;
+let threadSpeed = 10;
+
+// 캐릭터 생성
+let submarine;
+let sx, sy, sw = 60, sh = 35;
+
+// 배경이미지
+let background;
+
+// 장애물 요소
+let enemy = new Array();
+let enemyColor = ['red', 'blue', 'white'];
+
+// 타이머
+let loopInstance;
+
+// 게임 상태 저장
+let state_start = false;
+let state_over = false;
+
+// 키 상태
+let keyPressed = [];
+
+// 경과시간
+let oldTime;
+let startTime;
+let totalTime;
+
+window.addEventListener("load", initialize, false);
+window.addEventListener("keydown", getKeydown, false);
+window.addEventListener("keyup", getKeyup, false);
+
+
+function initialize() {
+    canvas = document.getElementById("canvas");
+    if(canvas == null || canvas.getContext == null) return;
+    ctx = canvas.getContext('2d');
+    
+    canvasBuf = document.getElementById("canvas");
+    canvasBuf.width = canvas.width;
+    canvasBuf.height = canvas.height;
+    bufferCtx = canvasBuf.getContext('2d');
+    
+    // 게임 시작 메세지
+    startMessage();
+    // 이미지 설정
+    setImage();
+    // 반복 동작 설정
+    setInterval(update, threadSpeed);
+}
+
+function update() {
+    if((keyPressed[13] == true)) {
+        // 게임 시작
+        alert("게임 시작");
+    }
+}
+
+function setImage() {
+    submarine = new Image();
+    submarine.src = '../img/myChar.png';
+
+    background = new Image();
+    background.src = "../img/back.jpg";
+}
+
+function startMessage() {
+    drawText(ctx, "Enter to Start", canvas.width/2, canvas.height/2-60, "bold 30px arial", "#FFE24F", "center");
+    drawText(ctx, "조작: 방향키", canvas.width/2, canvas.height/2-20, "bold 20px arial", "#CFCDFF", "center");
+}
+
+function drawText(ctx, text, x, y, font, color, align) {
+    if(font != undefined) ctx.font = font;
+    if(color != undefined) ctx.fillStyle = color;
+    if(align != undefined) ctx.textAlign = align;
+    ctx.fillText(text, x, y);
+}
+
+function getKeydown(event) {
+    keyPressed[event.keyCode] = true;
+}
+
+function getKeyup(event) {
+    keyPressed[event.keyCode] = false;
+}

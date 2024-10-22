@@ -1,0 +1,15 @@
+body {
+  background-color: black;
+  margin: 0;
+}
+
+#canvas {
+  width: 800px;
+  height: 600px;
+  background-color: #0099ff;
+}
+
+p {
+  text-align: center;
+  color: goldenrod;
+}
