@@ -43,21 +43,25 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const key = '48797574726e62723131317355744744';
-  let start_index = 1;
-  let end_index = 150;
+  const start_index = 1;
+  let end_index = 10;
 
-  $.ajax({
-    url: `http://openAPI.seoul.go.kr:8088/${key}/json/ListPublicReservationCulture/${start_index}/${end_index}`,
-    method: "GET",
-    success: function(res) {
-      console.log("연결 성공", res);
-      // 데이터가 있으면 renderData 함수 호출
-      renderData(res.ListPublicReservationCulture.row);
-    },
-    error: function(err) {
-      console.log("연결 실패", err.status);
-    }
-  });
+  function fetchData(start_index, end_index) {
+    let reqUrl = `http://openAPI.seoul.go.kr:8088/${key}/json/ListPublicReservationCulture/${start_index}/${end_index}`;
+    
+    $.ajax({
+      url: reqUrl,
+      method: "GET",
+      success: function(res) {
+        console.log("연결 성공", res);
+        // 데이터가 있으면 renderData 함수 호출
+        renderData(res.ListPublicReservationCulture.row);
+      },
+      error: function(err) {
+        console.log("연결 실패", err.status);
+      }
+    });
+  }
 
   function renderData(data) {
     data.forEach((item) => {
@@ -80,4 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
       tableBody.insertAdjacentHTML("beforeend", tableRow);
     });
   }
+
+  function getMoreInfo() {
+    const loadMoreInfo = document.querySelector("#loadMore");
+
+    loadMoreInfo.addEventListener("click", function() {
+      loadMoreInfo.disabled = true;
+
+      end_index += 10; // 인덱스를 10씩 증가시킵니다.
+      fetchData(start_index, end_index);
+      loadMoreInfo.disabled = false;
+    });
+  }
+
+  getMoreInfo(); // getMoreInfo 함수 호출
+
+  // 처음 데이터 로드
+  fetchData(start_index, end_index);
 });
