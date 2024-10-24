@@ -88,7 +88,7 @@ function fetchData(page, perPage, callback) {
     method: "GET",
     dataType: "json",
     contentType: "application/json",
-    success: function (res) {
+    success: function (res) {foods.js
       console.log("연결 성공", res);
       renderCards(res);
       renderTable(res);

@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("Found address:", address); // Debug log
           
           const updatedMessage = `
-            <div style="padding:5px; align:center;">
+            <div class="infowindow">
               ${address}
             </div>`;
           
@@ -263,3 +263,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   getMoreInfo();
 });
+
+

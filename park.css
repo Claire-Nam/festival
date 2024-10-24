@@ -259,6 +259,36 @@ tbody {
   text-align: center !important;
 }
 
+.infowindow {
+  padding: 3px 15px;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(139, 4, 4);
+  font-size: 20px;
+}
+
+/* .searchInput {
+  padding: 5px;
+  border-radius: 10px;
+  border: 2px solid #ffd2d2;
+}
+
+.searchInput:focus {
+  outline: 2px solid #ffd2d2;
+}
+
+.searchButton {
+  margin-left: 5px;
+  padding: 4px 10px;
+  border: 1px solid #ffd2d2;
+  background-color: #ffd2d2;
+  border-radius: 10px;
+  font-family: "slowslow";
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+} */
+
 /* "더보기" 버튼 스타일 */
 #loadMore {
   font-family: "SlowSlow";
