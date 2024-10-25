@@ -75,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const tableRow = `
       <tr>
         <td class="name">${item.SVCNM ? item.SVCNM : "이벤트 종료"}</td>
-        <td class="status">${item.STATNM ? item.STATNM : "이벤트 종료"}</td>
         <td class="place">${item.PLACENM ? item.PLACENM : "이벤트 종료"}</td>
         <td class="payment">${item.PAYATNM ? item.PAYATNM : "이벤트 종료"}</td>
         <td class="startSvc">${item.SVCOPNBGNDT ? formatDate(item.SVCOPNBGNDT) : "이벤트 종료"}</td>
