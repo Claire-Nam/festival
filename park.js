@@ -2,73 +2,67 @@ document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("map");
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
-    level: 6,
+    level: 3,
   };
   const map = new kakao.maps.Map(container, options);
 
-  const mapTypeControl = new kakao.maps.MapTypeControl();
-  map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+  const imgSrc = './assets/location.png',
+    imgSize = new kakao.maps.Size(42, 48),
+    imgOption = { offset: new kakao.maps.Point(21, 48) };
 
-  const zoomControl = new kakao.maps.ZoomControl();
-  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
+  let markerImg = new kakao.maps.MarkerImage(imgSrc, imgSize, imgOption);
   let userLocation = null;
   const allParkData = [];
-  let page = 1; // 전역 변수 선언
+  let page = 1;
   let perPage = 10;
-  let loadedDataCount = 0; // 이미 로드된 데이터의 수
+  let loadedDataCount = 0;
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       userLocation = new kakao.maps.LatLng(lat, lon);
-      
-      // First display the marker with initial message
+
+      const markerPosition = userLocation;
+
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: markerPosition,
+        image: markerImg,
+      });
+
       const initialMessage = `
         <div style="padding:5px;">
           <div>현재위치</div>
         </div>`;
-      
-      const marker = new kakao.maps.Marker({
-        map: map,
-        position: userLocation
-      });
-  
+
       const infowindow = new kakao.maps.InfoWindow({
         content: initialMessage,
-        removable: true
+        removable: true,
       });
-  
+
       infowindow.open(map, marker);
       map.setCenter(userLocation);
-      
-      // Then get the address and update the infowindow
+
       const geocoder = new kakao.maps.services.Geocoder();
-      
-      console.log("Attempting to get address for:", lat, lon); // Debug log
-      
-      geocoder.coord2RegionCode(lon, lat, function(result, status) {
-        console.log("Geocoder status:", status); // Debug log
-        console.log("Geocoder result:", result); // Debug log
-        
+
+      geocoder.coord2RegionCode(lon, lat, function (result, status) {
         if (status === kakao.maps.services.Status.OK) {
           const address = result[0].address_name;
-          console.log("Found address:", address); // Debug log
-          
+
           const updatedMessage = `
             <div class="infowindow">
               ${address}
             </div>`;
-          
+
           infowindow.setContent(updatedMessage);
-          console.log("InfoWindow content updated"); // Debug log
         } else {
-          console.log("Geocoder failed with status:", status); // Debug log
+          console.log("Geocoder failed with status:", status);
         }
       });
-  
+
       fetchAndMergeData();
+      gpsBtn(); // GPS 버튼 추가 함수 호출
     });
   } else {
     const locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
@@ -77,6 +71,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     displayMarker(locPosition, message);
     fetchAndMergeData();
+    gpsBtn(); // GPS 버튼 추가 함수 호출
+  }
+
+  function gpsBtn() {
+    const gpsButton = document.createElement("button");
+    gpsButton.innerHTML = '<img src="./assets/target.png" width="30" height="30">';
+    gpsButton.style.position = "absolute";
+    gpsButton.style.left = "15px";
+    gpsButton.style.bottom = "20px";
+    gpsButton.style.zIndex = "10";
+    gpsButton.style.background = "none";
+    gpsButton.style.border = "none";
+    gpsButton.style.cursor = "pointer";
+
+    gpsButton.addEventListener("click", function () {
+      if (userLocation) {
+        map.setCenter(userLocation); // 지도 중심을 현재 위치로 이동
+        map.setLevel(3); // 줌 레벨 조정 (선택 사항)
+      } else {
+        alert("현재 위치를 사용할 수 없습니다.");
+      }
+    });
+
+    container.appendChild(gpsButton); // 지도 컨테이너에 버튼 추가
   }
 
   function displayMarker(locPosition, message) {
@@ -85,53 +103,36 @@ document.addEventListener("DOMContentLoaded", function () {
       position: locPosition,
     });
 
-    const iwContent = message;
-    const iwRemoveable = true;
-
     const infowindow = new kakao.maps.InfoWindow({
-      content: iwContent,
-      removable: iwRemoveable,
+      content: message,
+      removable: true,
     });
 
     infowindow.open(map, marker);
     map.setCenter(locPosition);
   }
 
-  const reqUrl =
-    "https://api.odcloud.kr/api/15050093/v1/uddi:d19c8e21-4445-43fe-b2a6-865dff832e08";
-  const serviceKey =
-    "yQQSwbgJd1XztqRzDuOXA60QuXMUeCxfz3laS5T76FCYr9%2BzxmpWrlQVndXAux4Yb8bdsBcyPkOsgdPodGzzTQ%3D%3D";
+  // API 데이터 연결 및 렌더링
+  const reqUrl = "https://api.odcloud.kr/api/15050093/v1/uddi:d19c8e21-4445-43fe-b2a6-865dff832e08";
+  const serviceKey = "yQQSwbgJd1XztqRzDuOXA60QuXMUeCxfz3laS5T76FCYr9%2BzxmpWrlQVndXAux4Yb8bdsBcyPkOsgdPodGzzTQ%3D%3D";
+  const KEY = '48797574726e62723131317355744744';
 
   function fetchParkData(page, perPage) {
     const queryString = `?serviceKey=${serviceKey}&page=${page}&perPage=${perPage}`;
-
-    return $.ajax({
-      url: reqUrl + queryString,
-      method: "GET",
-      dataType: "json",
-      contentType: "application/json",
-    });
+    return fetch(reqUrl + queryString).then(response => response.json());
   }
 
-  const KEY = '48797574726e62723131317355744744';
-
-  function fetchSoeoulPark(page, perPage) {
+  function fetchSeoulPark(page, perPage) {
     const startIndex = (page - 1) * perPage + 1;
     const endIndex = page * perPage;
     const requestUrl = `http://openapi.seoul.go.kr:8088/${KEY}/json/GetParkInfo/${startIndex}/${endIndex}`;
-
-    return $.ajax({
-      url: requestUrl,
-      method: "GET",
-      dataType: "json",
-      contentType: "application/json",
-    });
+    return fetch(requestUrl).then(response => response.json());
   }
 
   function fetchAndMergeData() {
-    $.when(fetchParkData(page, perPage), fetchSoeoulPark(page, perPage))
-      .then((parkRes, seoulRes) => {
-        const parkData = parkRes[0].data.map((item) => ({
+    Promise.all([fetchParkData(page, perPage), fetchSeoulPark(page, perPage)])
+      .then(([parkRes, seoulRes]) => {
+        const parkData = parkRes.data.map((item) => ({
           주차장명: item.주차장명,
           운영요일: item.운영요일,
           주차장도로명주소: item.주차장도로명주소,
@@ -141,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
           경도: item.경도,
         }));
 
-        const seoulParkData = seoulRes[0].GetParkInfo.row.map((item) => ({
+        const seoulParkData = seoulRes.GetParkInfo.row.map((item) => ({
           주차장명: item.PKLT_NM,
           운영요일: item.OPERATING_DAY,
           주차장도로명주소: "서울특별시 " + item.ADDR,
@@ -153,8 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const combinedData = [...parkData, ...seoulParkData];
         mergeData(combinedData);
-
-        // 초기 10개 데이터 렌더링
         renderInitialData();
       })
       .catch((err) => {
@@ -177,7 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function renderInitialData() {
-    // 초기 10개 데이터 렌더링
     const initialData = allParkData.slice(0, 10);
     loadedDataCount = initialData.length;
     renderParkList(initialData);
@@ -186,7 +184,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function renderParkList(data) {
     const tableBody = document.querySelector("#parkTable");
     if (loadedDataCount === 0) {
-      // 테이블 헤더 추가 (최초 렌더링 시)
       tableBody.innerHTML = `
         <tr>
           <th>주차장명</th>
@@ -208,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <td class="parkfee">${item.요금정보 || "정보 없음"}</td>
         </tr>
       `;
-      tableBody.insertAdjacentHTML("beforeend", tableRow); // 기존 데이터 아래에 추가
+      tableBody.insertAdjacentHTML("beforeend", tableRow);
     });
   }
 
@@ -218,11 +215,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (loadMoreInfo) {
       loadMoreInfo.addEventListener("click", function () {
         loadMoreInfo.disabled = true;
-        page++; // 전역 변수 page를 증가시켜 다음 페이지를 요청
+        page++;
 
-        $.when(fetchParkData(page, perPage), fetchSoeoulPark(page, perPage))
-          .then((parkRes, seoulRes) => {
-            const parkData = parkRes[0].data.map((item) => ({
+        Promise.all([fetchParkData(page, perPage), fetchSeoulPark(page, perPage)])
+          .then(([parkRes, seoulRes]) => {
+            const parkData = parkRes.data.map((item) => ({
               주차장명: item.주차장명,
               운영요일: item.운영요일,
               주차장도로명주소: item.주차장도로명주소,
@@ -232,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
               경도: item.경도,
             }));
 
-            const seoulParkData = seoulRes[0].GetParkInfo.row.map((item) => ({
+            const seoulParkData = seoulRes.GetParkInfo.row.map((item) => ({
               주차장명: item.PKLT_NM,
               운영요일: item.OPERATING_DAY,
               주차장도로명주소: "서울특별시 " + item.ADDR,
@@ -263,5 +260,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
   getMoreInfo();
 });
-
-

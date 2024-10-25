@@ -10,12 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // 테이블이 있는지 확인
-  if (!tableBody) {
-    console.error("테이블 본문을 찾을 수 없습니다.");
-    return;
-  }
-
   // 검색 함수
   function performSearch() {
     const inputValue = inputElem.value.trim();

@@ -235,7 +235,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); 어두운 배경
+  background-color: rgba(0, 0, 0, 0.7); 
   display: none;
   z-index: 1000; /* 스와이퍼 위에 표시되도록 z-index 높임 */
 }
