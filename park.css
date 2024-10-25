@@ -267,6 +267,12 @@ tbody {
   font-size: 20px;
 }
 
+.parkSearch{
+  display: inline-block;
+  float: right;
+  margin-bottom: 10px;
+}
+
 #searchpark {
   padding: 5px;
   border-radius: 10px;

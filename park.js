@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // 지도 생성 및 추가
   const container = document.getElementById("map");
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -6,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   const map = new kakao.maps.Map(container, options);
 
+  // 마커 이미지 변경
   const imgSrc = './assets/location.png',
     imgSize = new kakao.maps.Size(42, 48),
     imgOption = { offset: new kakao.maps.Point(21, 48) };
@@ -13,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let markerImg = new kakao.maps.MarkerImage(imgSrc, imgSize, imgOption);
   let userLocation = null;
   const allParkData = [];
-  let page = 1;
-  let perPage = 10;
   let loadedDataCount = 0;
 
   if (navigator.geolocation) {
@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         image: markerImg,
       });
 
+      // 인포윈도우 생성
       const initialMessage = `
         <div style="padding:5px;">
           <div>현재위치</div>
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
       infowindow.open(map, marker);
       map.setCenter(userLocation);
 
+      // 가져온 위치의 경,위도 값을 주소로 변환
       const geocoder = new kakao.maps.services.Geocoder();
 
       geocoder.coord2RegionCode(lon, lat, function (result, status) {
@@ -62,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       fetchAndMergeData();
-      gpsBtn(); // GPS 버튼 추가 함수 호출
+      gpsBtn(); 
     });
   } else {
     const locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
@@ -71,9 +73,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     displayMarker(locPosition, message);
     fetchAndMergeData();
-    gpsBtn(); // GPS 버튼 추가 함수 호출
+    gpsBtn(); 
   }
 
+  // gps 버튼 함수
   function gpsBtn() {
     const gpsButton = document.createElement("button");
     gpsButton.innerHTML = '<img src="./assets/target.png" width="30" height="30">';
@@ -116,6 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const reqUrl = "https://api.odcloud.kr/api/15050093/v1/uddi:d19c8e21-4445-43fe-b2a6-865dff832e08";
   const serviceKey = "yQQSwbgJd1XztqRzDuOXA60QuXMUeCxfz3laS5T76FCYr9%2BzxmpWrlQVndXAux4Yb8bdsBcyPkOsgdPodGzzTQ%3D%3D";
   const KEY = '48797574726e62723131317355744744';
+  let page = 1;
+  let perPage = 10;
 
   function fetchParkData(page, perPage) {
     const queryString = `?serviceKey=${serviceKey}&page=${page}&perPage=${perPage}`;
